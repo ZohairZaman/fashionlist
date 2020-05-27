@@ -1,0 +1,27 @@
+version: '3.5'
+services:
+ web_dev:
+  build: .
+  ports:
+   - "4000:4000"
+  volumes:
+   - .:/app
+  environment:
+   - ENV=development
+   - PORT=4000
+   - DB=mongodb://ZohairZaman:Zohair14@ds159574.mlab.com:59574/fashionlist
+   - SECRET=4fJHm18oSiLnoZHr4wbbv4lBrXJZ7E1F+fBJjMBGVm1hNx0VcVMVxMvFgHgQPRdqsb6ZRtVzVfW2e9MBVnrJAJM94/c42c/5g51emBLRwT7EIxnXWqgxjCSAeczZSYxsO/4gtOjxeLgkxzbQz2Lgy7G90ogMqHlXyJBLhYSUGDpXrSz0Du1VNOwBcT777efq1qOMNIwlZ9myMP37gOTj75ekh0Z4I4JnKgxHyYEZpvvOWgpd/DUm1RhzPoKtrxSE7rMGrvkRSqdxAh4BIQqPuJf5eqB+yMmQLGk5zuET+cvMDFoIFusgLRihSEhrKB8FIqZdQjrhbYoPXdpXT30SRQ==
+ mongodb:
+  image: mongo:latest
+  container_name: "mongodb"
+  environment:
+   - MONGO_DATA_DIR=/usr/data/db
+   - MONGO_LOG_DIR=/dev/null
+  volumes:
+   - ./data/db:/usr/data/db
+  ports:
+   - 27017:27017
+  command: mongod --smallfiles --logpath=/dev/null # --quiet
+networks:
+ default:
+  name: web_dev
